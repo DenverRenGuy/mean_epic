@@ -1,0 +1,4 @@
+Assignment for Epic button
+https://github.com/DenverRenGuy/mean_epic
+
+NPM install will need to be run.

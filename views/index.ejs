@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Epic Button Assignment | Coding Dojo</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="site.css" media="screen" title="no title">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src='/socket.io/socket.io.js'></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>The Epic Button Game</h1>
+            <h2></h2>
+            <h4>Push this button for an epic counter update!</h4>
+            <button type="button" class='btn btn-primary center-block btn-lg' name="epicButton" id="epic-button">Push this EPIC Button!</button>
+            <button type="button" id="reset-button" class="btn btn-danger center-block btn-lg" name="reset">Reset</button>
+            <footer class="footer"></footer>
+        </div>
+    </body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //Open IO connection
+            var socket = io.connect();
+
+            //Page functions
+            $('#epic-button').click(function(){
+                console.log('Firing Server Socket update');
+                socket.emit('update_counter');
+            })
+            $('#reset-button').click(function(){
+                console.log('Firing Server Reset Count Socket Event');
+                socket.emit('reset_counter');
+            })
+            socket.on('full_broadcast', function(data){
+                console.log(data);
+                $('h2').html('The Epic Button has been pressed ' + data.setCount + ' times this set.');
+                $('footer').html('The total count for the epic button is: ' + data.totalCount);
+            })
+        })
+    </script>
+</html>

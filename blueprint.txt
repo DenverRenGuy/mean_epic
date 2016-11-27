@@ -1,0 +1,11 @@
+Import needed modules (Express, EJS, Sockets)
+Initiate web server, begin listening
+Connect sockets to server
+Render initial index view
+
+Index allow for button push
+send click over to the server
+server logs total click and click amount in set, updates
+serves new info back to all users
+
+Reset current set counter
